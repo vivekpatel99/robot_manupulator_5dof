@@ -14,6 +14,10 @@
         origin_rpy="0 0 0"
         origin_xyz="0 0 0"
         radius="0.08" length="0.03"
+        mass= "102"
+        ixx ="17.667" ixy ="17.667" ixz="0"
+        iyy ="17.667" iyz="0"
+        izz ="17.667"
         color="black"/>
 
     <m_joint name="${l000}__${l00}"
@@ -29,6 +33,10 @@
         origin_rpy="0 0 0"
         origin_xyz="0 0 0.015"
         length="0.05" radius="0.06"
+        mass= "102"
+        ixx ="17.667" ixy ="17.667" ixz="0"
+        iyy ="17.667" iyz="0"
+        izz ="17.667"
         color="black"/>
 
     <m_joint name="${l00}__${l01}"
@@ -44,6 +52,10 @@
         origin_rpy="0 0 0"
         origin_xyz="0 0 0.02"
         length="0.033" radius="0.03"
+        mass= "102"
+        ixx ="17.667" ixy ="17.667" ixz="0"
+        iyy ="17.667" iyz="0"
+        izz ="17.667"
         color="white"/>
 
     <m_joint name="${l01}__${l02}"
@@ -58,6 +70,10 @@
         origin_rpy="0 0 0"
         origin_xyz="0 0 0.055"
         length="0.105" radius="0.03"
+        mass= "102"
+        ixx ="17.667" ixy ="17.667" ixz="0"
+        iyy ="17.667" iyz="0"
+        izz ="17.667"
         color="black"/>
 
     <m_joint name="${l02}__${l03}"
@@ -72,6 +88,10 @@
         origin_rpy="0 0 0"
         origin_xyz="0 0 0.052"
         length="0.098" radius="0.03"
+        mass= "102"
+        ixx ="17.667" ixy ="17.667" ixz="0"
+        iyy ="17.667" iyz="0"
+        izz ="17.667"
         color="white"/>
 
     <m_joint name="${l03}__${l04}"
@@ -86,6 +106,10 @@
         origin_rpy="0 0 0"
         origin_xyz="0 0 0.016"
         length="0.027" radius="0.03"
+        mass= "102"
+        ixx ="17.667" ixy ="17.667" ixz="0"
+        iyy ="17.667" iyz="0"
+        izz ="17.667"
         color="black"/>
 
     <m_joint name="${l04}__${l05}"
@@ -101,6 +125,10 @@
         origin_rpy="0 0 0"
         origin_xyz="0 0 0.035"
         length="0.065" radius="0.03"
+        mass= "1.056"
+        ixx ="0.2667" ixy ="0" ixz="0"
+        iyy ="0.2667" iyz="0"
+        izz ="0.2667"
         color="white"/>
 <!-- *************************************link_01*********************************************-->
 

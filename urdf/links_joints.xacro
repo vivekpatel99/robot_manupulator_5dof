@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
 <!-- *************************************colors********************************************-->
     <material name="blue">
         <color rgba="0 0 0.8 1"/>
@@ -13,7 +14,7 @@
         <color rgba="1 1 1 1"/>
     </material>
 
-<!-- *************************************colors********************************************-->
+<!-- *************************************functions ********************************************-->
   <xacro:macro name="m_joint" params="name type axis_xyz origin_rpy origin_xyz parent child limit_e limit_l limit_u limit_v">
     <joint name="${name}" type="${type}">
       <axis xyz="${axis_xyz}" />
@@ -22,23 +23,9 @@
       <parent link="${parent}" />
       <child link="${child}" />
     </joint>
-
   </xacro:macro>
 
-  <xacro:macro name="m_link_cylinder" params="name origin_xyz origin_rpy radius length color">
-    <link name="${name}">
-        <origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
-      <visual>
-        <origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
-        <geometry>
-          <cylinder radius="${radius}" length="${length}"/>
-        </geometry>
-        <material name="${color}"/>
-      </visual>
-    </link>
-  </xacro:macro>
-
-  <xacro:macro name="m_link_box" params="name origin_xyz origin_rpy size mass ixx ixy ixz iyy iyz izz">
+  <xacro:macro name="m_link_cylinder" params="name origin_xyz origin_rpy radius length color mass ixx ixy ixz iyy iyz izz">
     <link name="${name}">
       <inertial>
         <mass value="${mass}" />
@@ -48,13 +35,14 @@
       <collision>
         <origin rpy="${origin_rpy}" xyz="${origin_xyz}" />
         <geometry>
-          <box size="${size}" />
+          <cylinder radius="${radius}" length="${length}" />
         </geometry>
       </collision>
       <visual>
         <origin rpy="${origin_rpy}" xyz="${origin_xyz}" />
         <geometry>
-          <box size="${size}" />
+          <cylinder radius="${radius}" length="${length}" />
+          <material name="${color}"/>
         </geometry>
       </visual>
     </link>
