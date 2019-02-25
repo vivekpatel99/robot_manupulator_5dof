@@ -1,6 +1,10 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+<!-- *************************************Constants*********************************** ******-->
+<xacro:property name="damping_value" value="50.0"/>
+<xacro:property name="friction_value" value="1.0"/>
+
 <!-- *************************************colors********************************************-->
     <material name="blue">
         <color rgba="0 0 0.8 1"/>
@@ -22,6 +26,7 @@
       <origin rpy="${origin_rpy}" xyz="${origin_xyz}" />
       <parent link="${parent}" />
       <child link="${child}" />
+      <dynamics damping="${damping_value}" friction="${friction_value}"/>
     </joint>
     <transmission name="trans_${name}">
       <type>transmission_interface/SimpleTransmission</type>
