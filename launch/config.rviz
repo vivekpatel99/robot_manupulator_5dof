@@ -7,7 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
-        - /RobotModel1/Links1
+        - /RobotModel1/Status1
         - /Axes1
         - /TF1
         - /TF1/Frames1
@@ -60,7 +60,7 @@ Visualization Manager:
       Links:
         All Links Enabled: true
         Expand Joint Details: false
-        Expand Link Details: true
+        Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
         base_link:
@@ -83,21 +83,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        link_03:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_04:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        link_05:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -112,7 +97,7 @@ Visualization Manager:
       Reference Frame: bottom_link
       Value: true
     - Class: rviz/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
         All Enabled: true
@@ -124,12 +109,12 @@ Visualization Manager:
       Tree:
         {}
       Update Interval: 0
-      Value: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: base_link
+    Fixed Frame: bottom_link
     Frame Rate: 30
   Name: root
   Tools:
@@ -165,7 +150,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: -0.234600395
+      Pitch: -0.289600551
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
       Yaw: 0.535394788

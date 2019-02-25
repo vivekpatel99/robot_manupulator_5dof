@@ -1,43 +1,44 @@
 <?xml version="1.0"?>
+<robot name="joyit" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find robot_manipulator_5dof)/urdf/links_joints.xacro"/>
+    <xacro:include filename="$(find robot_manipulator_5dof)/urdf/robot_parameters.xacro"/>
 
-<robot name="joy-it" xmlns:xacro="http://www.ros.org/wiki/xacro">
-
-    <!-- Include -->
-    <xacro:include filename="$(find robot_manipulator_5dof)/urdf/links_joints.xacro" />
-    <xacro:include filename="$(find robot_manipulator_5dof)/urdf/robot_parameters.xacro" />
-    <!-- Include -->
-
-
-
-<!-- *************************************bottom_link********************************************-->
+    <!-- *************************************bottom_link********************************************-->
     <m_link_cylinder name="${l000}"
         origin_rpy="0 0 0"
         origin_xyz="0 0 0"
         radius="0.08" length="0.03"
-        mass= "102"
-        ixx ="17.667" ixy ="17.667" ixz="0"
-        iyy ="17.667" iyz="0"
-        izz ="17.667"
+        mass= "1024"
+        ixx ="1.0" ixy ="0.0" ixz="0.0"
+        iyy ="1.0" iyz="0.0"
+        izz ="1.0"
         color="black"/>
 
+    <gazebo reference="${l000}">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
     <m_joint name="${l000}__${l00}"
-        type="fixed" axis_xyz="0 0 1"
-        limit_e="1000.0" limit_l="0" limit_u="3.14" limit_v="0.5"
+        type="revolute" axis_xyz="0 0 1"
+        limit_e="1000.0" limit_l="0.0" limit_u="0.0" limit_v="0.5"
         origin_rpy="0 0 0" origin_xyz="0 0 0.015"
         parent="${l000}"
         child="${l00}"/>
-
 
 <!-- *************************************base_link*********************************************-->
     <m_link_cylinder name="${l00}"
         origin_rpy="0 0 0"
         origin_xyz="0 0 0.015"
         length="0.05" radius="0.06"
-        mass= "102"
-        ixx ="17.667" ixy ="17.667" ixz="0"
-        iyy ="17.667" iyz="0"
-        izz ="17.667"
-        color="black"/>
+        mass= "1024"
+        ixx ="7.667" ixy ="7.667" ixz="0.0"
+        iyy ="7.667" iyz="0.0"
+        izz ="7.667"
+        color="white"/>
+
+    <gazebo reference="${l00}">
+        <material>Gazebo/Black</material>
+    </gazebo>
 
     <m_joint name="${l00}__${l01}"
         type="revolute" axis_xyz="0 0 1"
@@ -45,7 +46,6 @@
         origin_rpy="0 0 0" origin_xyz="0 0 0.028"
         parent="${l00}"
         child="${l01}"/>
-
 
 <!-- *************************************link_01*********************************************-->
     <m_link_cylinder name="${l01}"
@@ -58,12 +58,17 @@
         izz ="17.667"
         color="white"/>
 
-    <m_joint name="${l01}__${l02}"
+    <gazebo reference="${l01}">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+  <m_joint name="${l01}__${l02}"
         type="revolute" axis_xyz="0 1 0"
         limit_e="1000.0" limit_l="0" limit_u="3.14" limit_v="0.5"
         origin_rpy="0 0 0" origin_xyz="0 0 0.033"
         parent="${l01}"
         child="${l02}"/>
+
 
 <!-- *************************************link_02*********************************************-->
     <m_link_cylinder name="${l02}"
@@ -74,64 +79,17 @@
         ixx ="17.667" ixy ="17.667" ixz="0"
         iyy ="17.667" iyz="0"
         izz ="17.667"
-        color="black"/>
-
-    <m_joint name="${l02}__${l03}"
-        type="revolute" axis_xyz="0 1 0"
-        limit_e="1000.0" limit_l="0" limit_u="3.14" limit_v="0.5"
-        origin_rpy="0 0 0" origin_xyz="0 0 0.105"
-        parent="${l02}"
-        child="${l03}"/>
-
-<!-- *************************************link_03*********************************************-->
-    <m_link_cylinder name="${l03}"
-        origin_rpy="0 0 0"
-        origin_xyz="0 0 0.052"
-        length="0.098" radius="0.03"
-        mass= "102"
-        ixx ="17.667" ixy ="17.667" ixz="0"
-        iyy ="17.667" iyz="0"
-        izz ="17.667"
         color="white"/>
 
-    <m_joint name="${l03}__${l04}"
-        type="revolute" axis_xyz="0 1 0"
-        limit_e="1000.0" limit_l="0" limit_u="3.14" limit_v="0.5"
-        origin_rpy="0 0 0" origin_xyz="0 0 0.098"
-        parent="${l03}"
-        child="${l04}"/>
-
-<!-- *************************************link_04*********************************************-->
-    <m_link_cylinder name="${l04}"
-        origin_rpy="0 0 0"
-        origin_xyz="0 0 0.016"
-        length="0.027" radius="0.03"
-        mass= "102"
-        ixx ="17.667" ixy ="17.667" ixz="0"
-        iyy ="17.667" iyz="0"
-        izz ="17.667"
-        color="black"/>
-
-    <m_joint name="${l04}__${l05}"
-        type="revolute" axis_xyz="0 0 1"
-        limit_e="1000.0" limit_l="0" limit_u="3.14" limit_v="0.5"
-        origin_rpy="0 0 0" origin_xyz="0 0 0.027"
-        parent="link_04"
-        child="link_05"/>
-
-
-<!-- *************************************link_05*********************************************-->
-    <m_link_cylinder name="${l05}"
-        origin_rpy="0 0 0"
-        origin_xyz="0 0 0.035"
-        length="0.065" radius="0.03"
-        mass= "1.056"
-        ixx ="0.2667" ixy ="0" ixz="0"
-        iyy ="0.2667" iyz="0"
-        izz ="0.2667"
-        color="white"/>
-<!-- *************************************link_01*********************************************-->
-
-
+<!-- ************************************* ROS control plugin ********************************-->
+<!-- To simulate model in order to pasrse the trasnmission tage and assign appropriate hardware interfaces
+ and the control manager -->
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/joyit</robotNamespace>
+            <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+            <legacyModeNS>true</legacyModeNS>
+        </plugin>
+    </gazebo>
 
 </robot>

@@ -1,0 +1,61 @@
+joyit:
+  # Position Controllers ---------------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  joint1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: bottom_link__base_link
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: base_link__link_01
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: link_01__link_02
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+# Publish all joints states ---------------------------
+# joint_state_controller:
+#     publish_rate: 50
+#     extra_joints:
+#       - name: bottom_link__base_link
+#       - name: base_link__link_01
+#       - name: link_01__link_02
+#       - name: link_02__link_03
+#       - name: link_03__link_04
+#       - name: link_04__link_05
+
+# /gazebo_ros_control:
+#   pid_gains:
+#       bottom_link__base_link:
+#           p: 0.0
+#           i: 0.0
+#           d: 0.0
+
+#       base_link__link_01:
+#           p: 1000.0
+#           i: 0.01
+#           d: 10.0
+
+#       link_01__link_02:
+#           p: 1000.0
+#           i: 0.01
+#           d: 10.0
+
+      # link_02__link_03:
+      #     p: 1000.0
+      #     i: 0.01
+      #     d: 10.0
+
+      # link_03__link_04:
+      #     p: 1000.0
+      #     i: 0.01
+      #     d: 10.0
+
+      # link_04__link_05:
+      #     p: 1000.0
+      #     i: 0.01
+      #     d: 10.0

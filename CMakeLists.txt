@@ -14,6 +14,9 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   urdf
   xacro
+  controller_manager
+  joint_state_controller
+  robot_state_publisher
 )
 
 ## System dependencies are found with CMake's conventions
