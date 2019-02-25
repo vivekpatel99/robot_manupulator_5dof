@@ -7,7 +7,6 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
-        - /RobotModel1/Status1
         - /Axes1
         - /TF1
         - /TF1/Frames1
@@ -73,12 +72,46 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        dummy_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        grasping_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_finger_link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_finger_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         link_01:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         link_02:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_03:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_04:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_05:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -101,13 +134,48 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        base_link:
+          Value: true
+        bottom_link:
+          Value: true
+        dummy_link:
+          Value: true
+        grasping_frame:
+          Value: true
+        gripper_finger_link1:
+          Value: true
+        gripper_finger_link2:
+          Value: true
+        link_01:
+          Value: true
+        link_02:
+          Value: true
+        link_03:
+          Value: true
+        link_04:
+          Value: true
+        link_05:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
-      Show Axes: true
+      Show Axes: false
       Show Names: false
       Tree:
-        {}
+        dummy_link:
+          bottom_link:
+            base_link:
+              link_01:
+                link_02:
+                  link_03:
+                    link_04:
+                      link_05:
+                        grasping_frame:
+                          {}
+                        gripper_finger_link1:
+                          {}
+                        gripper_finger_link2:
+                          {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -135,7 +203,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.756831884
+      Distance: 1.4938519
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -150,10 +218,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: -0.289600551
+      Pitch: 0.374797463
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.535394788
+      Yaw: 0.115395129
     Saved: ~
 Window Geometry:
   Displays:

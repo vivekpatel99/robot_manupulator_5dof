@@ -3,6 +3,33 @@
     <xacro:include filename="$(find robot_manipulator_5dof)/urdf/links_joints.xacro"/>
     <xacro:include filename="$(find robot_manipulator_5dof)/urdf/robot_parameters.xacro"/>
 
+<!-- *************************************bottom_link**********************************************-->
+      <!-- Gripper roll link properties -->
+      <property name="gripper_roll_width" value="0.04" />
+      <property name="gripper_roll_len" value="0.02" />
+
+      <!-- Left gripper -->
+      <property name="left_gripper_len" value="0.02" />
+      <property name="left_gripper_width" value="0.02" />
+      <property name="left_gripper_height" value="0.08" />
+
+      <!-- Right gripper -->
+      <property name="right_gripper_len" value="0.02" />
+      <property name="right_gripper_width" value="0.02" />
+      <property name="right_gripper_height" value="0.08" />
+
+      <!-- Right gripper -->
+      <property name="grasp_frame_len" value="0.02" />
+      <property name="grasp_frame_width" value="0.02" />
+      <property name="grasp_frame_height" value="0.02" />
+
+    <xacro:macro name="inertial_matrix" params="mass">
+        <inertial>
+            <mass value="${mass}" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+    </xacro:macro>
+
     <!-- *************************************bottom_link********************************************-->
     <link name="dummy_link">
     </link>
@@ -59,9 +86,9 @@
         origin_xyz="0 0 0.02"
         length="0.033" radius="0.03"
         mass= "1"
-        ixx ="17.667" ixy ="17.667" ixz="0"
-        iyy ="17.667" iyz="0"
-        izz ="17.667"
+        ixx ="1.0" ixy ="1.0" ixz="0.0"
+        iyy ="0.5" iyz="0.0"
+        izz ="1.0"
         color="white"/>
 
     <gazebo reference="${l01}">
@@ -82,9 +109,9 @@
         origin_xyz="0 0 0.055"
         length="0.105" radius="0.03"
         mass= "1"
-        ixx ="17.667" ixy ="17.667" ixz="0"
-        iyy ="17.667" iyz="0"
-        izz ="17.667"
+        ixx ="1.0" ixy ="1.0" ixz="0.0"
+        iyy ="0.5" iyz="0.0"
+        izz ="1.0"
         color="white"/>
 
     <gazebo reference="${l02}">
@@ -104,9 +131,9 @@
         origin_xyz="0 0 0.052"
         length="0.098" radius="0.03"
         mass= "1"
-        ixx ="17.667" ixy ="17.667" ixz="0"
-        iyy ="17.667" iyz="0"
-        izz ="17.667"
+        ixx ="1.0" ixy ="1.0" ixz="0.0"
+        iyy ="0.5" iyz="0.0"
+        izz ="1.0"
         color="white"/>
 
     <gazebo reference="${l03}">
@@ -126,9 +153,9 @@
         origin_xyz="0 0 0.016"
         length="0.027" radius="0.03"
         mass= "1"
-        ixx ="17.667" ixy ="17.667" ixz="0"
-        iyy ="17.667" iyz="0"
-        izz ="17.667"
+        ixx ="1.0" ixy ="1.0" ixz="0.0"
+        iyy ="0.5" iyz="0.0"
+        izz ="1.0"
         color="black"/>
 
     <gazebo reference="${l04}">
@@ -139,8 +166,8 @@
         type="revolute" axis_xyz="0 0 1"
         limit_e="1000.0" limit_l="0" limit_u="3.14" limit_v="0.5"
         origin_rpy="0 0 0" origin_xyz="0 0 0.027"
-        parent="link_04"
-        child="link_05"/>
+        parent="${l04}"
+        child="${l05}"/>
 
 
 <!-- *************************************link_05*********************************************-->
@@ -149,14 +176,107 @@
         origin_xyz="0 0 0.035"
         length="0.065" radius="0.03"
         mass= "1"
-        ixx ="0.2667" ixy ="0" ixz="0"
-        iyy ="0.2667" iyz="0"
-        izz ="0.2667"
+        ixx ="1.0" ixy ="1.0" ixz="0.0"
+        iyy ="0.5" iyz="0.0"
+        izz ="1.0"
         color="white"/>
 
     <gazebo reference="${l05}">
         <material>Gazebo/White</material>
     </gazebo>
+
+    <joint name="finger_joint1" type="prismatic">
+        <parent link="${l05}"/>
+        <child link="gripper_finger_link1"/>
+        <origin xyz="0.0 0 0" />
+        <axis xyz="0 1 0" />
+        <limit effort="100" lower="0" upper="0.03" velocity="1.0"/>
+
+        <safety_controller k_position="20"
+                             k_velocity="20"
+                             soft_lower_limit="${-0.15 }"
+                             soft_upper_limit="${ 0.0 }"/>
+        <dynamics damping="50" friction="1"/>
+  </joint>
+<!-- *************************************link_05*********************************************-->
+
+<!-- LEFT GRIPPER AFT LINK -->
+  <link name="gripper_finger_link1">
+     <visual>
+      <origin xyz="0.0 -0.02 0.105"/>
+      <geometry>
+           <box size="${left_gripper_len} ${left_gripper_width} ${left_gripper_height}" />
+      </geometry>
+      <material name="White" />
+    </visual>
+    <xacro:inertial_matrix mass="1"/>
+  </link>
+
+  <gazebo reference="l_gripper_aft_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+<!-- Joint between Wrist roll and finger 2 -->
+
+  <joint name="finger_joint2" type="prismatic">
+    <parent link="${l05}"/>
+    <child link="gripper_finger_link2"/>
+    <origin xyz="0.0 0.0 0.0" />
+    <axis xyz="0 1 0"/>
+    <limit effort="1" lower="-0.03" upper="0.0" velocity="1.0"/>
+
+<!--    <mimic joint="gripper_finger_joint" multiplier="-1.0" offset="0.0" /> -->
+
+    <dynamics damping="50" friction="1"/>
+  </joint>
+
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+  <!-- RIGHT GRIPPER AFT LINK -->
+
+
+  <link name="gripper_finger_link2">
+    <visual>
+        <origin xyz="0.0 0.02 0.105"/>
+        <geometry>
+            <box size="${right_gripper_len} ${right_gripper_width} ${right_gripper_height}" />
+        </geometry>
+        <material name="White"/>
+    </visual>
+    <xacro:inertial_matrix mass="1"/>
+  </link>
+
+  <gazebo reference="r_gripper_aft_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+    <!-- Grasping frame -->
+    <link name="grasping_frame">
+        <inertial>
+            <origin xyz="0 0 0.0" rpy="0 0 0"/>
+            <mass value="0.0001"/>
+            <cuboid_inertia mass="0.0001" x="0.001" y="0.001" z="0.001"/>
+            <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="100.0"  iyz="0.0"  izz="1.0" />
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <box size="${grasp_frame_len} ${grasp_frame_width} ${grasp_frame_height}" />
+            </geometry>
+            <material name="White"/>
+        </visual>
+    </link>
+
+    <joint name="grasping_frame_joint" type="fixed">
+        <parent link="${l05}"/>
+        <child link="grasping_frame"/>
+        <origin xyz="0.0 0 0.072" rpy="0 0 0"/>
+    </joint>
+
+
+
+
+
 <!-- *************************************link_01*********************************************-->
 
 
